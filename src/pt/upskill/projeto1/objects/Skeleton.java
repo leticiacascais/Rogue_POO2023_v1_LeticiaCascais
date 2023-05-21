@@ -7,9 +7,8 @@ import java.util.Random;
 
 public class Skeleton extends Enemy {
 
-
-    public Skeleton(Position position, int damage, int health) {
-        super(position, 20, 30);
+    public Skeleton(Position position) {
+        super(position, 20, 30, 15);
     }
 
     @Override

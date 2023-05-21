@@ -6,7 +6,7 @@ import pt.upskill.projeto1.rogue.utils.Position;
 public class Meat extends Item {
 
     public Meat(Position position) {
-        super(position);
+        super(position, 12);
     }
 
     public int getHealthPoints() {

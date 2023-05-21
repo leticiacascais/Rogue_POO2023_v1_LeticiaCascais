@@ -10,9 +10,8 @@ import java.util.Random;
 
 public class Thief extends Enemy {
 
-
-    public Thief(Position position, int damage, int health) {
-        super(position, 30, 35);
+    public Thief(Position position) {
+        super(position, 30, 35, 25);
     }
 
     @Override
@@ -47,7 +46,7 @@ public class Thief extends Enemy {
     }
 
     @Override
-    public void moveIntoEnemy(Position heroPosition, Room room) {
+    public void moveIntoHero(Position heroPosition, Room room) {
         Position currentPosition = getPosition();
         double initialDistance = currentPosition.distanceTo(heroPosition);
         List<Position> possiblePositions = new ArrayList<>();

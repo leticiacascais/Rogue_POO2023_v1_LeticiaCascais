@@ -5,10 +5,8 @@ import pt.upskill.projeto1.rogue.utils.Position;
 
 public class BadGuy extends Enemy {
 
-    private Position position;
-
-    public BadGuy(Position position, int damage, int health) {
-        super(position, 25, 40);
+    public BadGuy(Position position) {
+        super(position, 25, 40, 20);
     }
 
 

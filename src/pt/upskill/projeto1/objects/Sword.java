@@ -7,7 +7,7 @@ public class Sword extends Item {
     public int damage = 20;
 
     public Sword(Position position) {
-        super(position);
+        super(position, 15);
     }
 
     public int getDamage() {

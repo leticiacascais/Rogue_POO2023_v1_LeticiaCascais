@@ -39,7 +39,7 @@ public class Room implements ImageTile{
                     }
                     i++;
                 }
-                else if ((line.charAt(0) == '#')){
+                else if ((line.charAt(0) == '#' && line.length() > 1)){
                     String[] info = line.split(" ");
                     if(line.charAt(4) == 'D'){
                         Door door = new Door(info[1], info[3], info[4]);
@@ -77,7 +77,7 @@ public class Room implements ImageTile{
                     tiles.add(new Wall(new Position(i, j)));
                     break;
                 case 'S':
-                    tiles.add(new Skeleton(new Position(i, j), 20, 30));
+                    tiles.add(new Skeleton(new Position(i, j)));
                     break;
                 case 'A':
                     Sword sword = new Sword(new Position(i, j));
@@ -95,18 +95,20 @@ public class Room implements ImageTile{
                     tiles.add(hammer);
                     break;
                 case 'B':
-                    tiles.add(new Bat(new Position(i, j), 12, 15));
+                    tiles.add(new Bat(new Position(i, j)));
                     break;
                 case 'G':
-                    tiles.add(new BadGuy(new Position(i, j), 25, 40));
+                    tiles.add(new BadGuy(new Position(i, j)));
                     break;
                 case 'D':
                     tiles.add(new StairsDown(new Position(i, j)));
                     break;
-                case 'U':
-                    tiles.add(new StairsUp(new Position(i, j)));
                 case 'T':
-                    tiles.add(new Thief(new Position(i, j), 30, 35));
+                    tiles.add(new Thief(new Position(i, j)));
+                    break;
+                case 'V':
+                    tiles.add(new Win(new Position(i, j)));
+                    break;
                 case 'K':
                     if (!keys.isEmpty()) {
                         Key key = keys.get(0);
@@ -131,7 +133,7 @@ public class Room implements ImageTile{
 
     public boolean isWall(Position position) {
         for (ImageTile tile : tiles) {
-            if (tile instanceof Wall && tile.getPosition().equals(position)) {
+            if (tile instanceof Wall && tile.getPosition().equals(position) || position.getY() == -1 || position.getY() == 10 || position.getX() == -1 || position.getX() == 10) {
                 return true;
             }
         }
@@ -159,6 +161,15 @@ public class Room implements ImageTile{
     public boolean isItems(Position position) {
         for (ImageTile tile : tiles) {
             if (tile instanceof Item && tile.getPosition().equals(position)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isWin(Position position) {
+        for (ImageTile tile : tiles) {
+            if (tile instanceof Win && tile.getPosition().equals(position)) {
                 return true;
             }
         }

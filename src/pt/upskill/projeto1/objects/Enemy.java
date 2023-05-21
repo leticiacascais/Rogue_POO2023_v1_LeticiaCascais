@@ -5,7 +5,6 @@ import pt.upskill.projeto1.gui.ImageTile;
 import pt.upskill.projeto1.rogue.utils.Position;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -15,10 +14,21 @@ public abstract class Enemy implements ImageTile {
     public int damage;
     public int health;
 
-    public Enemy(Position position, int damage, int health) {
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public int points;
+
+    public Enemy(Position position, int damage, int health, int points) {
         this.position = position;
         this.damage=damage;
         this.health=health;
+        this.points=points;
     }
 
     public void moveRandom(Room room) {
@@ -52,7 +62,7 @@ public abstract class Enemy implements ImageTile {
         attackHero(nextPosition, room);
     }
 
-    public void moveIntoEnemy(Position heroPosition, Room room) {
+    public void moveIntoHero(Position heroPosition, Room room) {
         Position currentPosition = getPosition();
         double initialDistance = currentPosition.distanceTo(heroPosition);
         List<Position> possiblePositions = new ArrayList<>();
@@ -74,8 +84,6 @@ public abstract class Enemy implements ImageTile {
                 }
             }
         }
-        System.out.println(minDistance);
-        System.out.println(nextPosition);
 
         if (initialDistance < 5 && nextPosition != null) {
             attackHero(nextPosition, room);
@@ -84,21 +92,16 @@ public abstract class Enemy implements ImageTile {
         }
     }
 
-
-
-
-
     public void attackHero(Position nextPosition, Room room){
-        if (nextPosition != null && !room.isWall(nextPosition) && !room.isDoor(nextPosition) && !room.isItems(nextPosition) && !room.isEnemy(nextPosition)) {
+        if (nextPosition != null && !room.isWall(nextPosition) && !room.isDoor(nextPosition) && !room.isEnemy(nextPosition)) {
             if(room.isHero(nextPosition)){
                 for (ImageTile tile : room.tiles) {
                     if (tile instanceof Hero && tile.getPosition().equals(nextPosition)) {
                         ((Hero) tile).reduceHealth(this.getDamage());
                         ImageMatrixGUI.getInstance().setStatus("O inimigo atacou-te e perdeste " + getDamage() + " de vida.");
-                        System.out.println(((Hero) tile).getHealth());
 
                         if (((Hero) tile).getHealth() <= 0) {
-                            ImageMatrixGUI.getInstance().setStatus("Perdeste o jogo!");
+                            ImageMatrixGUI.getInstance().setStatus("Morreste! Voltaste ao Checkpoint inicial!");
                             return;
                         }
                         return;

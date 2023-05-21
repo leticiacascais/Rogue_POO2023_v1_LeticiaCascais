@@ -7,8 +7,18 @@ public abstract class Item implements ImageTile {
 
     private Position position;
 
-    public Item(Position position) {
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    private int points;
+    public Item(Position position, int points) {
         this.position = position;
+        this.points=points;
     }
 
     public ImageTile setPosition(Position position) {

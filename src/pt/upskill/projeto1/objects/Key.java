@@ -8,7 +8,7 @@ public class Key extends Item {
     private String keyName;
 
     public Key(Position position, String keyName) {
-        super(position);
+        super(position, 20);
         this.keyName = keyName;
     }
 

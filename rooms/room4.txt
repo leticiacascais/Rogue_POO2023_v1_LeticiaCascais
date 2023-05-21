@@ -1,12 +1,17 @@
+#
 # 7 D room3.txt 6
-# 8 D room0.txt 0
-WW8WWWWWWW
-W  M   G W
-W W  WWWWW
-W W  W   U
+# 8 D room4.txt 9 key1
+# 9 D room4.txt 8 key1
+#
+# K key1
+#
+WWWWWWWWWW
+WWWM   G W
+WVW  WWWWW
+9 W  T   8
 WWW  W K W
 W S  WWWWW
-W WW     D
-W    WWWWW
+W WW     W
+WM   WWWWW
 W  B     7
 WWWWWWWWWW

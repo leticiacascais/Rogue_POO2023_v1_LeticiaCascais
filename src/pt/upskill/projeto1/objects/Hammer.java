@@ -9,7 +9,7 @@ public class Hammer extends Item {
 
 
     public Hammer(Position position) {
-        super(position);
+        super(position, 10);
     }
 
     @Override

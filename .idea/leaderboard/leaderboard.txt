@@ -1,4 +1,3 @@
-KKKKK,50
-Joao,10
-aaaaaaaaaa,2
-Batat,0
+player2,228
+Maria,79
+Leticia,59

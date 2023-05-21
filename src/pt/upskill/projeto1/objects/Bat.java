@@ -5,8 +5,8 @@ import pt.upskill.projeto1.rogue.utils.Position;
 
 public class Bat extends Enemy {
 
-    public Bat(Position position, int damage, int health) {
-        super(position, 12, 15);
+    public Bat(Position position) {
+        super(position, 12, 15, 10);
     }
 
     @Override

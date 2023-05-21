@@ -33,6 +33,9 @@ public class Leaderboard {
     }
 
     public void addPlayer(String username, int points) {
+        if(username == null || username.equalsIgnoreCase("")){
+            username = "player" + players.size();
+        }
         Player player = new Player(username, points);
         players.add(player);
         updateLeaderboardFile();
@@ -54,7 +57,7 @@ public class Leaderboard {
         String printLeaderboard = " ";
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
-            printLeaderboard += player.getUsername() + " " + player.getPoints() + " points" + "\r\n";
+            printLeaderboard += player.getUsername() + " " + player.getPoints() + " pontos" + "\r\n";
         }
         ImageMatrixGUI.getInstance().showMessage("Leaderboard", printLeaderboard);
     }

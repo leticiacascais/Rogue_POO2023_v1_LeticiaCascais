@@ -85,6 +85,7 @@ public class Hero implements ImageTile {
 
                         if (((Enemy) tile).isDefeated()) {
                             ImageMatrixGUI.getInstance().setStatus("Inimigo derrotado!");
+                            this.setPoints(this.getPoints() + ((Enemy) tile).getPoints());
                             room.removeEnemy((Enemy) tile);
                             room.tiles.remove(tile);
                         }
@@ -99,7 +100,7 @@ public class Hero implements ImageTile {
 
 
         if (inventory.size() == 3) {
-            ImageMatrixGUI.getInstance().setStatus("Inventory full!");
+            ImageMatrixGUI.getInstance().setStatus("Inventário Cheio!");
             return;
         }
 
@@ -248,8 +249,8 @@ public class Hero implements ImageTile {
             statusTiles.add(new Red(new Position(4, 0)));
             statusTiles.add(new Red(new Position(5, 0)));
             statusTiles.add(new Red(new Position(6, 0)));
-
         }
+
         ImageMatrixGUI.getInstance().newStatusImages(statusTiles);
     }
     private Position findEmptyPosition() {
@@ -274,10 +275,9 @@ public class Hero implements ImageTile {
                 if (item.getName().equalsIgnoreCase("GoodMeat") && item.getPosition().equals(this.position)) {
                     Meat meat = (Meat) item;
                     Health += meat.getHealthPoints();
-                    ImageMatrixGUI.getInstance().setStatus("You ate meat and gained " + meat.getHealthPoints() + " health points!");
+                    this.setPoints(this.getPoints() + ((Meat) item).getPoints());
+                    ImageMatrixGUI.getInstance().setStatus("Comeste a carne e ganhaste " + meat.getHealthPoints() + " de vida!");
                     itemsToRemove.add(item);
-                    //gui.newImages(room.tiles);
-                    System.out.println("ola");
                 } else if (item.getName().equalsIgnoreCase("Sword") && item.getPosition().equals(this.position)) {
                     Sword sword = (Sword) item;
                     Damage += sword.getDamage();
@@ -286,14 +286,14 @@ public class Hero implements ImageTile {
                         if (emptyPosition != null) {
                             inventory.add(sword);
                             sword.setPosition(emptyPosition);
-                            ImageMatrixGUI.getInstance().setStatus("You caught sword and gained " + sword.getDamage() + " damage points!");
-                            System.out.println("a");
+                            ImageMatrixGUI.getInstance().setStatus("Apanhaste a espada e ganhaste " + sword.getDamage() + " de dano!");
+                            this.setPoints(this.getPoints() + ((Sword) item).getPoints());
+                            ((Sword) item).setPoints(0);
                             itemsToRemove.add(item);
-                            System.out.println("b");
                             statusTiles.add(item);
                         }
                         else{
-                            ImageMatrixGUI.getInstance().setStatus("Inventory is full. Cannot add sword.");
+                            ImageMatrixGUI.getInstance().setStatus("Inventário cheio, não podes apanhar a espada!");
                         }
                     }
                 }
@@ -305,12 +305,14 @@ public class Hero implements ImageTile {
                         if (emptyPosition != null) {
                             inventory.add(hammer);
                             hammer.setPosition(emptyPosition);
-                            ImageMatrixGUI.getInstance().setStatus("You caught " + hammer.getName() + " and gained " + hammer.getDamage() + " damage points!");
+                            ImageMatrixGUI.getInstance().setStatus("Apanhaste o martelo e ganhaste " + hammer.getDamage() + " de dano!");
+                            this.setPoints(this.getPoints() + ((Hammer) item).getPoints());
+                            ((Hammer) item).setPoints(0);
                             itemsToRemove.add(item);
                             statusTiles.add(item);
                         }
                         else{
-                            ImageMatrixGUI.getInstance().setStatus("Inventory is full. Cannot add Hammer.");
+                            ImageMatrixGUI.getInstance().setStatus("IInventário cheio, não podes apanhar o martelo!");
                         }
                     }
                 }
@@ -321,12 +323,14 @@ public class Hero implements ImageTile {
                         if (emptyPosition != null) {
                             inventory.add(item);
                             key.setPosition(emptyPosition);
-                            ImageMatrixGUI.getInstance().setStatus("You caught " + ((ImageTile) key).getName());
+                            ImageMatrixGUI.getInstance().setStatus("Apanhaste a " + ((ImageTile) key).getName());
+                            this.setPoints(this.getPoints() + ((Key) item).getPoints());
+                            ((Key) item).setPoints(0);
                             itemsToRemove.add(item);
                             statusTiles.add(item);
                         }
                         else{
-                            ImageMatrixGUI.getInstance().setStatus("Inventory is full. Cannot add Hammer.");
+                            ImageMatrixGUI.getInstance().setStatus("IInventário cheio, não podes apanhar a key!");
                         }
                     }
                 }
@@ -334,7 +338,6 @@ public class Hero implements ImageTile {
 
             statusTiles.remove(itemsToRemove);
             room.tiles.removeAll(itemsToRemove);
-
             ImageMatrixGUI.getInstance().newImages(room.tiles);
             updateStatusTiles();
             ImageMatrixGUI.getInstance().newStatusImages(statusTiles);
