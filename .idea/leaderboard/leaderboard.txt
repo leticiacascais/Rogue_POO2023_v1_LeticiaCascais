@@ -1,0 +1,5 @@
+Joao,10
+Batat,0
+Bnanas,0
+Mifuel,0
+Maria,0
