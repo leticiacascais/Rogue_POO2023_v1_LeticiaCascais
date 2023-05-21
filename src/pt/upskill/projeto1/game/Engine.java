@@ -67,7 +67,7 @@ public class Engine {
         verifyPassDoor(hero.getPosition());
 
         for (ImageTile tile : currentRoom.tiles){
-            if(tile instanceof Enemy ){
+            if(tile instanceof Enemy){
                 ((Enemy) tile).moveIntoEnemy(hero.getPosition(),currentRoom);
             }
         }
@@ -141,9 +141,7 @@ public class Engine {
                         }
                     }
                 }
-
             }
-
         }
     }
 

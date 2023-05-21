@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Leaderboard {
     public List<Player> players = new ArrayList<>();
-    public String leaderboardFile = "C:\\Users\\letic\\OneDrive\\Ambiente de Trabalho\\Rogue_POO2023_v1_Nome_Completo\\.idea\\leaderboard\\leaderboard.txt";
+    public String leaderboardFile = "C:\\Users\\letic\\OneDrive\\Ambiente de Trabalho\\Git\\Rogue_POO2023_v1_LeticiaCascais\\.idea\\leaderboard\\leaderboard.txt";
 
     public void loadLeaderboard() {
         List<Player> existingPlayers = new ArrayList<>();

@@ -345,15 +345,12 @@ public class Hero implements ImageTile {
     }
 
     public boolean heroHasKey(String keyName){
-
         for (ImageTile key: inventory) {
             if(key instanceof Key){
                 if(((Key) key).getKeyName().equalsIgnoreCase(keyName))
                     return true;
             }
         }
-
-        ImageMatrixGUI.getInstance().setStatus("Precisas da chave para abrir a porta!");
         return false;
     }
 }

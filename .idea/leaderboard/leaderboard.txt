@@ -1,5 +1,4 @@
+KKKKK,50
 Joao,10
+aaaaaaaaaa,2
 Batat,0
-Bnanas,0
-Mifuel,0
-Maria,0

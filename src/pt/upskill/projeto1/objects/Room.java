@@ -1,5 +1,6 @@
 package pt.upskill.projeto1.objects;
 
+import pt.upskill.projeto1.gui.ImageMatrixGUI;
 import pt.upskill.projeto1.gui.ImageTile;
 import pt.upskill.projeto1.rogue.utils.Position;
 
@@ -14,7 +15,6 @@ public class Room implements ImageTile{
     public List<Door> doors = new ArrayList<>();
     public Position heroPosition = new Position(0 , 0);
     public List<Key> keys = new ArrayList<>();
-
     public String roomName;
 
     public Room(String filePath, String roomName){
@@ -54,7 +54,6 @@ public class Room implements ImageTile{
                 }
             }
             fileScanner.close();
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -67,64 +66,60 @@ public class Room implements ImageTile{
             }
         }
     }
+
     public void AssignLetters (char letter, int j, int i){
-        switch (letter) {
-            case 'W':
-                tiles.add(new Wall(new Position(i, j)));
-                break;
-            case '0':
-            case '1':
-            case '2':
-            case '3':
-            case '4':
-            case '5':
-            case '6':
-            case '7':
-            case '8':
-                setDoorPosition(letter, j, i);
-                break;
-            case 'S':
-                tiles.add(new Skeleton(new Position(i, j), 20, 30));
-                break;
-            case 'A':
-                Sword sword = new Sword(new Position(i, j));
-                tiles.add(sword);
-                break;
-            case 'H':
-                heroPosition = new Position(i ,j);
-                break;
-            case 'M':
-                Meat meat = new Meat(new Position(i, j));
-                tiles.add(meat);
-                break;
-            case 'Z':
-                Hammer hammer = new Hammer(new Position(i, j));
-                tiles.add(hammer);
-                break;
-            case 'B':
-                tiles.add(new Bat(new Position(i, j), 12, 15));
-                break;
-            case 'G':
-                tiles.add(new BadGuy(new Position(i, j), 25, 40));
-                break;
-            case 'D':
-                tiles.add(new StairsDown(new Position(i, j)));
-                break;
-            case 'U':
-                tiles.add(new StairsUp(new Position(i, j)));
-            case 'T':
-                tiles.add(new Thief(new Position(i, j), 30, 35));
-            case 'K':
-                if (!keys.isEmpty()) {
-                    Key key = keys.get(0);
-                    key.setPosition(new Position(i, j));
-                    tiles.add(key);
-                }
-                break;
-            default:
-                break;
+        if (Character.isDigit(letter)){
+            setDoorPosition(letter, j, i);
+        }
+        else {
+            switch (letter) {
+                case 'W':
+                    tiles.add(new Wall(new Position(i, j)));
+                    break;
+                case 'S':
+                    tiles.add(new Skeleton(new Position(i, j), 20, 30));
+                    break;
+                case 'A':
+                    Sword sword = new Sword(new Position(i, j));
+                    tiles.add(sword);
+                    break;
+                case 'H':
+                    heroPosition = new Position(i ,j);
+                    break;
+                case 'M':
+                    Meat meat = new Meat(new Position(i, j));
+                    tiles.add(meat);
+                    break;
+                case 'Z':
+                    Hammer hammer = new Hammer(new Position(i, j));
+                    tiles.add(hammer);
+                    break;
+                case 'B':
+                    tiles.add(new Bat(new Position(i, j), 12, 15));
+                    break;
+                case 'G':
+                    tiles.add(new BadGuy(new Position(i, j), 25, 40));
+                    break;
+                case 'D':
+                    tiles.add(new StairsDown(new Position(i, j)));
+                    break;
+                case 'U':
+                    tiles.add(new StairsUp(new Position(i, j)));
+                case 'T':
+                    tiles.add(new Thief(new Position(i, j), 30, 35));
+                case 'K':
+                    if (!keys.isEmpty()) {
+                        Key key = keys.get(0);
+                        key.setPosition(new Position(i, j));
+                        tiles.add(key);
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
+
     public void setDoorPosition(char letter, int j, int i){
         for (Door door: doors) {
             if(door.getNumberDoor().equalsIgnoreCase(String.valueOf(letter))){
@@ -137,15 +132,6 @@ public class Room implements ImageTile{
     public boolean isWall(Position position) {
         for (ImageTile tile : tiles) {
             if (tile instanceof Wall && tile.getPosition().equals(position)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isDoorClosed(Position position) {
-        for (ImageTile tile : tiles) {
-            if (tile instanceof DoorClosed && tile.getPosition().equals(position)) {
                 return true;
             }
         }
@@ -178,14 +164,6 @@ public class Room implements ImageTile{
         }
         return false;
     }
-    public boolean isSkeleton(Position position) {
-        for (ImageTile tile : tiles) {
-            if (tile instanceof Enemy && tile.getPosition().equals(position)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public boolean isEnemy(Position position) {
         for (ImageTile tile : tiles) {
@@ -208,7 +186,6 @@ public class Room implements ImageTile{
     public void removeEnemy(Enemy enemy) {
         tiles.remove(enemy);
     }
-
 
     public Position getHeroPosition(){
         return heroPosition;
