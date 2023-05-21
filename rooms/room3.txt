@@ -1,0 +1,12 @@
+# 5 D room2.txt 4
+# 6 D room4.txt 7
+WWWWWWWW6W
+W K   W  W
+W  G  W  W
+WWW   W  W
+W       SW
+W  WWW WWW
+W  W M   W
+W  WW    W
+W  B     W
+WWWWWW5WWW

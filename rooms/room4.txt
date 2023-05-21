@@ -1,0 +1,12 @@
+# 7 D room3.txt 6
+# 8 D room0.txt 0
+WW8WWWWWWW
+W  M   G W
+W W  WWWWW
+W W  W   U
+WWW  W K W
+W S  WWWWW
+W WW     D
+W    WWWWW
+W  B     7
+WWWWWWWWWW
